@@ -11,19 +11,39 @@
 	<properties>
 		<docker.image.prefix>kammana</docker.image.prefix>
 		<sonar.host.url>http://18.181.164.81:9000/</sonar.host.url>
-
+        <maven.compiler.source>1.8</maven.compiler.source> <!-- Specify Java 8 for source -->
+        <maven.compiler.target>1.8</maven.compiler.target> <!-- Specify Java 8 for target -->
 	</properties>
-	<dependencies>
 
-		
+	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
+	
+	<build>
+        <plugins>
+            <!-- Update the maven-war-plugin to a modern version -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version> <!-- Recommended modern version -->
+            </plugin>
+            <!-- Add maven-compiler-plugin to explicitly set Java version -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- A common, stable version -->
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 	
 	<distributionManagement>
 		 <snapshotRepository>
@@ -45,5 +65,4 @@
 	    </pluginRepository>
 	</pluginRepositories>
 
-	
 </project>
